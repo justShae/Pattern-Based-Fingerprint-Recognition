@@ -1,10 +1,10 @@
 # Pattern-Based-Fingerprint-Recognition
-**System Overview
-**
+System Overview
+
 This system is designed for fingerprint enhancement and comparison. It processes two fingerprint images to improve their quality and then evaluates their similarity. The system uses advanced image processing techniques to enhance the fingerprints and provides detailed comparison results.
 
-**Process Overview
-**
+Process Overview
+
 Upload Fingerprint Images: Begin by uploading two grayscale fingerprint images that you want to analyze.
 
 Enhancement: The system applies Gabor filters to both images. This enhancement step improves the details and clarity of the fingerprints, making key features more distinct.
