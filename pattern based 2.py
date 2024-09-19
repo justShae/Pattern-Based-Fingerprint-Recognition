@@ -25,8 +25,8 @@ def compare_histograms(img1, img2, method):
     return similarity
 
 # Load the fingerprint images
-fingerprint1_filename = 'B RIGHT INDEX.jpg'
-fingerprint2_filename = 'samples/BRWG1_1.jpg'
+fingerprint1_filename = 'image1.jpg'
+fingerprint2_filename = 'image2.jpg'
 fingerprint1 = cv2.imread(fingerprint1_filename, 0)
 fingerprint2 = cv2.imread(fingerprint2_filename, 0)
 
@@ -60,17 +60,11 @@ for i, theta in enumerate([0, np.pi / 4, np.pi / 2, 3 * np.pi / 4]):
     cv2.imwrite(os.path.join(output_subdir, f'filtered2_theta{i}.jpg'), filtered_img2)
 
 # Compare enhanced fingerprints using different methods
-match_score_correl = compare_histograms(enhanced_fingerprint1, enhanced_fingerprint2, method=cv2.HISTCMP_CORREL)
-match_score_chisqr = compare_histograms(enhanced_fingerprint1, enhanced_fingerprint2, method=cv2.HISTCMP_CHISQR)
-match_score_intersect = compare_histograms(enhanced_fingerprint1, enhanced_fingerprint2, method=cv2.HISTCMP_INTERSECT)
 match_score_bhattacharyya = compare_histograms(enhanced_fingerprint1, enhanced_fingerprint2, method=cv2.HISTCMP_BHATTACHARYYA)
 
 # Convert Bhattacharyya distance to similarity score (1 - distance)
 final_match_score = 1 - match_score_bhattacharyya
 
-print(f'Match score (Correlation): {match_score_correl}')
-print(f'Match score (Chi-Square): {match_score_chisqr}')
-print(f'Match score (Intersection): {match_score_intersect}')
 print(f'Match score (Bhattacharyya): {match_score_bhattacharyya}')
 print(f'Final Match Score: {final_match_score}')
 
@@ -82,10 +76,7 @@ cv2.imwrite(enhanced_fingerprint2_filename, enhanced_fingerprint2)
 
 # Save match scores
 with open(os.path.join(output_subdir, 'match_scores.txt'), 'w') as f:
-    f.write(f'Match score (Correlation): {match_score_correl}\n')
-    f.write(f'Match score (Chi-Square): {match_score_chisqr}\n')
-    f.write(f'Match score (Intersection): {match_score_intersect}\n')
-    f.write(f'Match score (Bhattacharyya): {match_score_bhattacharyya}\n')
+        f.write(f'Match score (Bhattacharyya): {match_score_bhattacharyya}\n')
     f.write(f'Final Match Score: {final_match_score}\n')
 
 # Combine images side by side for visualization
